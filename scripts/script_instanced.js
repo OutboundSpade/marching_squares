@@ -20,7 +20,7 @@ class MarchingSquares {
 		this.width = rect.width;
 		this.height = rect.height;
 
-		this.rez = args.resolution || 10;
+		this.rez = args.resolution || 32;
 		this.circleCount = args.circleCount || 12;
 		this.circleRadius = args.circleRadius || 60;
 		if ("interpolation" in args) this.interpolation = args.interpolation;
@@ -42,11 +42,34 @@ class MarchingSquares {
 			"with arguments",
 			args
 		);
+		console.log(this);
 
 		//start everything up
 		this.generateMap();
 		this.generateCircles();
 		requestAnimationFrame(this.stepSimulation.bind(this));
+	}
+
+	drawGrid() {
+		this.ctx.strokeStyle = "rgba(0,0,0,0.1)";
+		this.ctx.beginPath();
+		const w = this.width;
+		const h = this.height;
+		for (var x = 0; x < w; x += this.rez) {
+			this.ctx.moveTo(x, 0);
+			this.ctx.lineTo(x, this.height);
+		}
+		for (var y = 0; y < h; y += this.rez) {
+			this.ctx.moveTo(0, y);
+			this.ctx.lineTo(this.width, y);
+		}
+		this.ctx.stroke();
+
+		document.getElementById("grid_width").innerText = w / this.rez;
+		document.getElementById("grid_height").innerText = h / this.rez;
+		document.getElementById("grid_rez").innerText = this.rez;
+		document.getElementById("grid_total").innerText =
+			(w / this.rez) * (h / this.rez);
 	}
 
 	setCanvasSize() {
@@ -71,7 +94,7 @@ class MarchingSquares {
 			y: Math.random() * this.height,
 			vx: 2 * Math.random() - 1,
 			vy: 2 * Math.random() - 1,
-			r: adjusted_r + adjusted_r * Math.random()
+			r: (adjusted_r + adjusted_r * Math.random()) / 2,
 		};
 
 		circle.r2 = circle.r * circle.r;
@@ -212,11 +235,11 @@ class MarchingSquares {
 					var a = [x * this.rez + this.rez * lerp(1, nw, ne), y * this.rez];
 					var b = [
 						x * this.rez + this.rez,
-						y * this.rez + this.rez * lerp(1, ne, se)
+						y * this.rez + this.rez * lerp(1, ne, se),
 					];
 					var c = [
 						x * this.rez + this.rez * lerp(1, sw, se),
-						y * this.rez + this.rez
+						y * this.rez + this.rez,
 					];
 					var d = [x * this.rez, y * this.rez + this.rez * lerp(1, nw, sw)];
 				}
@@ -290,7 +313,7 @@ function binaryToType(nw, ne, se, sw) {
 	return a.reduce((res, x) => (res << 1) | x);
 }
 
-window.addEventListener("mousemove", ev => {
+window.addEventListener("mousemove", (ev) => {
 	mouseCircle.gx = ev.clientX;
 	mouseCircle.gy = ev.clientY;
 });

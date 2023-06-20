@@ -32,7 +32,8 @@ var m = new MarchingSquares("canvas", {
 		if (this.showCircles) {
 			this.drawCircles();
 		}
-	}
+		this.drawGrid();
+	},
 });
 
 var explanationSection = document.getElementById("explanation");
@@ -42,7 +43,7 @@ setTimeout(() => {
 
 window.addEventListener("resize", m.setCanvasSize.bind(m));
 
-window.onscroll = function() {
+window.onscroll = function () {
 	scrollFunction();
 };
 
@@ -61,28 +62,28 @@ var gridValuesDemo = new MarchingSquares("gridValuesDemo", {
 		this.updateGridPoints();
 		this.drawCircles();
 		this.drawPoints();
-	}
+	},
 });
 var coarseNoInterp = new MarchingSquares("coarseNoInterp", {
 	resolution: 50,
 	circleCount: 5,
 	interpolation: false,
-	circleRadius: 80
+	circleRadius: 80,
 });
 
 var noInterp = new MarchingSquares("noInterp", {
 	resolution: 10,
 	circleCount: 5,
-	interpolation: false
+	interpolation: false,
 });
 
 var highResDemo = new MarchingSquares("highResDemo", {
 	resolution: 10,
-	circleCount: 8
+	circleCount: 8,
 });
 
 var interpolatedDemo = new MarchingSquares("interpolatedDemo", {
 	resolution: 50,
 	circleCount: 5,
-	circleRadius: 80
+	circleRadius: 80,
 });
