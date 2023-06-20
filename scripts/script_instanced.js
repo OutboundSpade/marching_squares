@@ -55,7 +55,7 @@ class MarchingSquares {
 		this.generateCircles();
 	}
 	drawGrid() {
-		this.ctx.strokeStyle = "rgba(0,0,0,0.1)";
+		this.ctx.strokeStyle = "rgba(0,0,0,0.25)";
 		this.ctx.beginPath();
 		const w = this.width;
 		const h = this.height;
