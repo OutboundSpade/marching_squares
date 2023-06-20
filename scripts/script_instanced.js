@@ -22,6 +22,7 @@ class MarchingSquares {
 
 		this.rez = args.resolution || 32;
 		this.circleCount = args.circleCount || 12;
+		this.scaleSize = args.size || 1;
 		this.circleRadius = args.circleRadius || 60;
 		if ("interpolation" in args) this.interpolation = args.interpolation;
 		else this.interpolation = true;
@@ -49,7 +50,10 @@ class MarchingSquares {
 		this.generateCircles();
 		requestAnimationFrame(this.stepSimulation.bind(this));
 	}
-
+	setCircleSize(size) {
+		this.circleRadius = size;
+		this.generateCircles();
+	}
 	drawGrid() {
 		this.ctx.strokeStyle = "rgba(0,0,0,0.1)";
 		this.ctx.beginPath();
@@ -94,7 +98,7 @@ class MarchingSquares {
 			y: Math.random() * this.height,
 			vx: 2 * Math.random() - 1,
 			vy: 2 * Math.random() - 1,
-			r: (adjusted_r + adjusted_r * Math.random()) / 2,
+			r: (adjusted_r + adjusted_r * Math.random()) / this.scaleSize,
 		};
 
 		circle.r2 = circle.r * circle.r;

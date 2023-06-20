@@ -59,15 +59,20 @@
       <!-- buttons and sliders for the main demo -->
       <div class="row">
         <div class="one-half column">
-          <input id="resolution" style="direction: rtl" type="range" min="5" step="1" max="50" value="10" class="slider"
+          <input id="resolution" style="direction: rtl" type="range" min="5" step="1" max="50" value="32" class="slider"
             oninput="m.rez = parseInt(this.value); m.generateMap(); document.getElementById('resolutiono').textContent=this.value">
           <label for="resolution" class="u-pull-left">resolution</label>
-          <output id="resolutiono" class="u-pull-right" name="result">10</output class="u-pull-right">
+          <output id="resolutiono" class="u-pull-right" name="result">32</output class="u-pull-right">
 
           <input id="density" type="range" min="5" step="1" max="20" value="12" class="slider"
             oninput="m.circleCount = parseInt(this.value); m.setCircleRadius(64-2*parseInt(this.value)); document.getElementById('densityo').textContent=this.value">
           <label for="resolution" class="u-pull-left">blob density</label>
           <output id="densityo" class="u-pull-right" name="result">12</output class="u-pull-right">
+
+			<input id="size" style="direction: rtl" type="range" min="1" step="1" max="50" value="1" class="slider"
+            oninput="m.size = parseInt(this.value); m.setCircleSize(parseInt(this.value)); document.getElementById('sizeo').textContent=this.value">
+          <label for="size" class="u-pull-left">size</label>
+          <output id="sizeo" class="u-pull-right" name="result">1</output class="u-pull-right">
 
         </div>
         <div class="one-half column">
